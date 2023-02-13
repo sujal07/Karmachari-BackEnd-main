@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/* =============================== Variables =========================== */
+:root {
+    /* ==================MAIN COLORS==================*/
+    --hue-color: 207;
+    /*Purple 250 - Green 142 - Blue 230 - Pink 340 sky blue: 205*/
+    --primary-color: hsl(var(--hue-color), 75%, 50%);
+    --primary-color-alt: hsl(var(--hue-color), 100%, 90%);
+    --primary-color-sec: hsl(var(--hue-color), 70%, 20%);
+    --dark-color: rgb(51, 51, 51);
+    --dark-color-alt: hsl(0, 0%, 36%);
+    --dark-selected: hsl(0, 0%, 20%);
+    --Checkin: hsl(120, 50%, 50%);
+    --Checkin-hover: hsl(120, 50%, 30%);
+    --checkout: hsl(0, 100%, 70%);
+    /* =====================TEXTS ======================*/
+    --text-dark-color: #333;
+    --text-dark-color-alt: grey;
+    --text-light-color: whitesmoke;
+}
+
+/* ============================== GOlbal styling ======================= */
+* {
+    padding: 0rem;
+    margin: 0rem;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+}
+
+body {
+    margin: 0rem;
+}
+
+.hero-content {
+    height: 100vh;
+    width: 100%;
+    background:var(--text-light-color);
+    position: absolute;
+        z-index: -1;
+        top: 6.4%;
+        left: 15%;
+        width: max-content;
+        width: 85%;
+        height: 93.66%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* ============================== CSS starts ======================= */
+
+.hero {
+    width: 97%;
+    height: 95%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: rgb(20, 30,var(--hue-color),0.3 )
+}
+.Title-text
+{
+
+    font-weight: bold;
+    padding: 1rem 0 1rem 5%;
+    font-size: 1.5rem;
+    color: var(--text-light-color);
+    /* background-color: yellow; */
+}
+
+/* ============================== Information Section (left Box)======================= */
+.information_section{
+    height: 75%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.User-basic-information {
+    height: 100%;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 5px;
+    opacity: .9;
+    background-color: var(--primary-color-alt);
+}
+
+.user-head {
+    height: 10%;
+    width: 100%;
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: var(--text-dark-color);
+    text-align: center;
+}
+
+.user-image-info {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: var(--primary-color-alt);
+}
+
+.user-image {
+    border-radius: 50%;
+    border:.3rem solid white;
+    height: 90%;
+    width: 100%;
+    color: var(--primary-color-alt);
+}
+.lines
+{
+    position: relative;
+    width: 100%;
+    height: 45px;
+}
+.lines::after, .lines::before
+{
+    content: '';
+    position: absolute;
+    margin: auto;
+    height: .1rem;
+    background: var(--text-light-color) ;
+    width: 40%;
+    top: 45%;
+}
+.lines::after
+{
+    left: 0;
+}
+.lines::before
+{
+    right: 0;
+}
+.circle
+{
+    height: 60%;
+    width: 10%;
+    border: .2rem solid var(--text-light-color);
+    left: 0;right: 0;top: 0;bottom: 0;
+    margin: auto;
+    border-radius: 50%;
+    transform: translateY(30%);
+}
+.user-details
+{
+    display: flex;
+    justify-content: space-around;
+    width: 95%;
+    padding-bottom: 10%;
+}
+.Employee-name {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.Question
+{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+.Answer
+{
+    width: 40%;
+    display: flex;
+    /* background-color: red; */
+    flex-direction: column;
+    text-align: right;
+}
+/* ============================== Master Section (Right Box)======================= */
+.master-section {
+    height: 85%;
+    width: 65%;
+    background-color: var(--primary-color-alt);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 1.5%;
+}
+.master-title {
+    height: 12%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.32rem;
+    font-weight: bold;
+    color: var(--text-light-color);
+    background-color:var(--primary-color);
+    border-bottom: .1rem solid var(--text-light-color);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.big_container{
+    height: 20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.inputbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 45%;
+}
+
+.Title {
+    font: 1.2rem;
+    font-weight: bold;
+    color: var(--text-dark-color-alt);
+    padding: 0 0 1% 1%;
+}
+
+.inputbox div{
+    height: 2.7rem;
+    /* text-align: left; */
+    padding: 0 0 0 2%;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--text-dark-color);
+    background-color: var(--text-light-color);
+    border-radius: 5px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.name2 {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.big_box
+{
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    margin-left: 2.5%;
+    width: 95%;
+    /* background-color: blue; */
+}
+.birth {
+ 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+@media only screen and (max-width:900px) {
+    .hero
+    {
+        margin-bottom: 6px;
+    }
+    .hero-content
+    {
+        height: fit-content;
+        width: 100%;
+        left: 0;
+    }
+    .information_section
+    {
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .User-basic-information
+    {
+        height: 500px;
+        width: 85%;
+        margin-bottom: 40px;
+    }
+    .master-section
+    {
+        height: 5   00px;
+        width: 85%;
+        margin-bottom: 20px;
+    }
+}

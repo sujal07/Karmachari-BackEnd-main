@@ -1,0 +1,297 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/* =============================== Variables =========================== */
+:root {
+    /* ==================MAIN COLORS==================*/
+    --hue-color: 207;
+    /*Purple 250 - Green 142 - Blue 230 - Pink 340 sky blue: 205*/
+    --primary-color: hsl(var(--hue-color), 75%, 50%);
+    --primary-color-alt: hsl(var(--hue-color), 100%, 90%);
+    --primary-color-sec: hsl(var(--hue-color), 70%, 20%);
+    --dark-color: rgb(51, 51, 51);
+    --dark-color-alt: hsl(0, 0%, 36%);
+    --dark-selected: hsl(0, 0%, 20%);
+    --Checkin: hsl(120, 50%, 50%);
+    --Checkin-hover: hsl(120, 50%, 30%);
+    --checkout: hsl(0, 100%, 70%);
+    /* =====================TEXTS ======================*/
+    --text-dark-color: #333;
+    --text-dark-color-alt: grey;
+    --text-light-color: whitesmoke;
+}
+*
+{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: 'Poppins',sans-serif;
+   /* overflow: hidden; */
+}
+body{
+    height: 100vh;
+    width: 100vw;
+}
+.hero
+{
+    position: relative;
+    top: 7%;
+    left: 15%;
+    height: 93%;
+    width: 85%;
+    /* background-color: var(--text-light-color); */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(20, 30,var(--hue-color),0.3 )
+}
+.title-text
+{
+    text-align: left;
+    width: 90%;
+    font-size: 1.2rem;
+    color: whitesmoke;
+}
+.container
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: top;
+    width: 99%;
+    height: 90%;
+    padding: 2.5% .5%;
+    border-radius: 5px;
+}
+.apply-leave
+{
+    /* align-self: center; */
+    background-color: var(--text-light-color);
+    height: 98%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 1%;
+    padding:1% 2%;
+    border-radius: 5px;
+}
+.heading
+{
+    font-size: .7rem;
+    color: var(--primary-color);
+    text-align: left;
+    width: 100%;
+    height: 10%;
+    margin: 2% 0;
+}
+.input-section-container
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 98%;
+    width: 100%;
+    /* background-color: red; */
+}
+.flexbox
+{
+    width: 100%;
+}
+.question_leave
+{
+    font-size: .9rem;
+}
+.answer_leave
+{
+    width: 100%;
+    height: 90%;
+    outline: none;
+}
+.bigbox
+{
+    height: 40%;
+}
+.option-leave
+{
+    width: 100%;
+}
+.submit_btn
+{
+    height: 9%;
+    width: 25%;
+    border-radius: 10%;
+    outline: none;
+    border: none;
+    font-weight: bold;
+    color: var(--text-light-color);
+    background-color: var(--primary-color);
+    cursor: pointer;
+}
+/* ============Right Cntainer========= */
+.leave-records
+{
+    background-color: var(--text-light-color);
+    height: fit-content;
+    width: 66%;
+    border-radius:5px;
+    padding:1% 2%;
+}
+.show-option
+{
+    display: flex;
+    font-size: .9rem;
+    margin: 2% 0;
+}
+.number-of-item
+{
+    font-size: .7rem;
+    margin: 0 .5rem;
+}
+/* ===============Table CSS================ */
+.table-container {
+    border-collapse: collapse;
+    margin: 25px 0;
+    width: 100%;
+    font-size: .7rem;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: scroll;
+    /* background-color: red; */
+    height: 350px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.table-container thead
+{
+    position: sticky;
+    top: 0;
+}
+.table-container thead tr {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+.table-container th,
+.table-container td {
+    padding: 12px 15px;
+}
+
+.table-container tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.table-container tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.table-container tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+.status_lv
+{
+    text-align: center;
+    border-radius: 5px;
+    padding: 0 .5rem;
+}
+.s0
+{
+    background-color: grey;
+}
+.s1
+{
+    background-color: var(--Checkin);
+}
+.s2
+{
+    background-color: var(--checkout);
+}
+@media screen and (max-width:900px)
+{   
+    body
+    {
+        height: fit-content;
+    }
+    .hero
+    {
+        position: absolute;
+        left: 0;
+        top: 7%;
+        width: 100%;
+        height: fit-content;
+    }
+    .container
+    {
+        /* display: none; */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .apply-leave
+    {
+        width: 97%;
+        height: 550px;
+    }
+    .flexbox
+    {
+        height: 50px;
+        /* background-color: red; */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .answer_leave
+    {
+        height: 50%;
+    }
+    #message-leave
+    {
+        height: 80%;
+    }
+    .bigbox
+    {
+        height: 150px;
+    }
+    /* MY LEAVES TABLE================= */
+    .leave-records
+    {
+        margin-top: 15px;
+        width: 98%;
+        height: 600px;
+        overflow: hidden;
+    }
+    .table-container
+    {
+        padding: 0;
+        height: fit-content;
+        margin: 0;
+        width: 100%;
+        transform: translateX(-1rem);
+        /* background-color: red; */
+        font-size: .7rem;
+    }
+    .table-container th,
+    .table-container td
+    {
+        width: 5%;
+    }
+    .SN
+    {
+        width: 10px;
+    }
+    .message_lv
+    {
+        display: none;
+    }
+    .status_lv
+    {
+        padding: 0;
+        color: transparent;
+        width: 18px;
+        border-radius: 50%;
+    }
+    .Date_lv
+    {
+        display: none;
+    }
+}
