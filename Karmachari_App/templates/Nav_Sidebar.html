@@ -36,7 +36,7 @@
                         Password<i class="fas fa-arrow-right arrow-icon-sub"></i></a></div>
 			{%if user.is_authenticated%}
                 <button class="sub-item" id=><i class="fas fa-right-from-bracket sub-item-icon"></i><a
-                        href="Login.html"></i>Logout<i class="fas fa-arrow-right arrow-icon-sub"></i></a></button>
+                        href="/logout"></i>Logout<i class="fas fa-arrow-right arrow-icon-sub"></i></a></button>
 			{%endif%}
             </ul>
         </div>
@@ -89,13 +89,14 @@
         <div class="close-icon_pw">
             <i class="fas fa-xmark"></i>
         </div>
-        <form class="form_pw" action="">
-            <p class="question_pw">Current Password:</p>
-            <input class="Answer_pw" type="password">
-            <p class="question_pw">New Password:</p>
-            <input class="Answer_pw" type="password">
-            <p class="question_pw">Confirm Password:</p>
-            <input class="Answer_pw" type="password"><br>
+        <form class="form_pw" method="POST">
+            {% csrf_token %}
+            <p class="question_pw">Current Password:{{form.old_password}}</p>
+            
+            <p class="question_pw">New Password:{{form.new_password1}}</p>
+            
+            <p class="question_pw">Confirm Password:{{form.new_password2}}</p>
+            <br>
             <input class="submit-btn_pw" value="Save" type="submit" \>
         </form>
         {% for message in messages %}
