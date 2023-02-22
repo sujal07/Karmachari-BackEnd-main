@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.http import JsonResponse
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
+from .forms import LeavesForm
 
 # Create your views here.
 def index(request):
@@ -109,10 +110,41 @@ def checkout(request):
 
 
 #####################################LEAVES############################################
+@login_required(login_url='login')
 def leaves(request):
+    leaves= Leaves.objects.filter(user_id=request.user.id)
+    submitted=False
     profile=Profile.objects.get(user=request.user)
-    context={
-      'profile':profile,
-      'navbar':'leaves',
-      }
-    return render(request,'leaves.html',context)
+    form = LeavesForm()
+    if request.method == 'POST':
+        form = LeavesForm(request.POST)
+        if form.is_valid():
+            form.instance.user_id = request.user.id
+            # Leaves = form.save(commit=False)
+            # Leaves.user = request.user
+            form.save()
+            return HttpResponseRedirect('leaves?submitted=True')
+    else:
+        form=LeavesForm()
+        if 'submitted in request.GET':
+            submitted=True
+            context={
+            'profile':profile,
+            # 'navbar':'leaves',
+            'form': form,
+            'submitted':submitted,
+            'leaves':leaves,
+            }
+            return render(request,'leaves.html',context)
+
+
+# @login_required(login_url='login')
+# def leavesform(request):
+#     form = LeavesForm()
+#     if request.method == 'POST':
+#         form = LeavesForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('leaves')
+#     context = {'form': form}
+#     return render(request, '/', context)
