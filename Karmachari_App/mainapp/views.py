@@ -74,7 +74,20 @@ def notice(request):
     }
     return render(request,'notices.html',context)
 
-
+@login_required(login_url='login')
+def attendance(request):
+    user_object = User.objects.get(username=request.user.username)
+    profile = Profile.objects.get(user=user_object)
+    notices= Notice.objects.all()
+    context={
+        'profile':profile,
+        'notices':notices,
+        'navbar':'attendance',
+        
+    }
+    return render(request,'attendance.html',context)
+    
+    
 
 @csrf_exempt
 def checkin(request):
