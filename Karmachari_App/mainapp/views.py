@@ -137,14 +137,3 @@ def leaves(request):
             }
             return render(request,'leaves.html',context)
 
-
-# @login_required(login_url='login')
-# def leavesform(request):
-#     form = LeavesForm()
-#     if request.method == 'POST':
-#         form = LeavesForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('leaves')
-#     context = {'form': form}
-#     return render(request, '/', context)
