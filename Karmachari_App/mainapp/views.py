@@ -52,7 +52,7 @@ def logout(request):
     return redirect('login')
 
 @login_required(login_url='login')
-def yourinformation(request):
+def information(request):
       profile=Profile.objects.get(user=request.user)
       context={
       'profile':profile,
