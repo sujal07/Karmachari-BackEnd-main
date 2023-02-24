@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from mainapp.models import *
 from django.utils import timezone
 from django.http import JsonResponse
-from datetime import datetime
+from datetime import datetime, timedelta, date
 from django.views.decorators.csrf import csrf_exempt
 from .forms import LeavesForm
 
@@ -112,14 +112,41 @@ def checkout(request):
         current_calendar = Calendar.objects.filter(user=user).latest('checkInTime')
         current_calendar.checkOutTime = checkOutTime
         current_calendar.save()
-        return JsonResponse({'out_time': checkOutTime})
+        duration = current_calendar.calculate_duration()
+
+        # Get the schedule of the user's department
+        profile = Profile.objects.get(user=request.user)
+        department = profile.department.id
+        schedule = Schedule.objects.get(department=department)
+        late_time = datetime.combine(date.today(), schedule.schedule_start) + timedelta(minutes=15)
+        late_time = late_time.time()
+
+
+        # Determine the status based on the schedule and check-in time
+        if current_calendar.checkInTime.time() > late_time:
+            status = 'L'  # Late
+        elif current_calendar.checkOutTime.time() < schedule.schedule_end:
+            status = 'LV'  # Leave
+        elif duration > (schedule.schedule_end - schedule.schedule_start).total_seconds() / 3600.0:
+            status = 'A'  # Absent
+        else:
+            status = 'P'  # Presents
+
+        # Create an Attendance object
+        attendance = Attendance.objects.create(
+            user=user,
+            name=profile.user.get_full_name(),
+            calendar=current_calendar,
+            duration=duration,
+            status=status,
+        )
+
+        return JsonResponse({'out_time': checkOutTime, 'duration': duration})
     response = {'message': 'Success'}
     return JsonResponse(response)
 
 
-# def check_in_out(request):
-#     print("Checkin")
-#     return redirect('/notices')
+
 
 
 #####################################LEAVES############################################

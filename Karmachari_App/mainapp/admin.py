@@ -8,5 +8,6 @@ admin.site.register(Department)
 admin.site.register(Leaves)
 admin.site.register(Calendar)
 admin.site.register(Salary)
-admin.site.register(Schedule)
 admin.site.register(Payroll)
+admin.site.register(Schedule)
+
