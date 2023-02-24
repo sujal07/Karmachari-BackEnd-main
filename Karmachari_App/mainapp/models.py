@@ -58,20 +58,20 @@ class Leaves(models.Model):
     def __str__(self):
         return self.subject
     
-class Calendar(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    dateOfQuestion = models.DateField(null=True)
-    checkInTime = models.DateTimeField(auto_now_add=True)
-    checkOutTime = models.DateTimeField(auto_now_add=True)
-    overtime = models.DateTimeField(null=True)
-    def __str__(self):
-        return self.user.username
-    def calculate_duration(self):
-        if self.checkOutTime:
-            duration = self.checkOutTime - self.checkInTime
-            return duration.total_seconds() / 3600.0  # Convert to hours
-        else:
-            return 0
+# class Calendar(models.Model):
+#     user = models.ForeignKey(User,on_delete=models.CASCADE)
+#     dateOfQuestion = models.DateField(null=True)
+#     checkInTime = models.DateTimeField(auto_now_add=True)
+#     checkOutTime = models.DateTimeField(auto_now_add=True)
+#     overtime = models.DateTimeField(null=True)
+#     def __str__(self):
+#         return self.user.username
+    # def calculate_duration(self):
+    #     if self.checkOutTime:
+    #         duration = self.checkOutTime - self.checkInTime
+    #         return duration.total_seconds() / 3600.0  # Convert to hours
+    #     else:
+    #         return 0
     
 class Salary(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -81,10 +81,9 @@ class Salary(models.Model):
         return self.user.username
     
 class Schedule(models.Model):
-    department = models.OneToOneField(Department, on_delete=models.CASCADE)
-    schedule_start = models.TimeField(null=True)
-    schedule_end = models.TimeField(null=True)
-
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    schedule_start = models.TimeField()
+    schedule_end = models.TimeField()
     def __str__(self):
         return self.department.name
     
@@ -112,8 +111,11 @@ class Attendance(models.Model):
         ('Leave', 'Leave'),
     )
     user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    dateOfQuestion = models.DateField(null=True)
+    checkInTime = models.DateTimeField(auto_now_add=True,null=True)
+    checkOutTime = models.DateTimeField(auto_now_add=True,null=True)
+    overtime = models.DateTimeField(null=True)
     name=models.CharField(max_length=255,null=True)
-    calendar = models.ForeignKey(Calendar, on_delete=models.CASCADE)
     duration = models.FloatField(null=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES)
 
@@ -122,3 +124,10 @@ class Attendance(models.Model):
     def save(self, *args, **kwargs):
         self.name = f"{self.user.first_name} {self.user.last_name}"
         super().save(*args, **kwargs)
+        
+    def calculate_duration(self):
+        if self.checkOutTime:
+            duration = self.checkOutTime - self.checkInTime
+            return duration.total_seconds() / 3600.0  # Convert to hours
+        else:
+            return 0

@@ -97,7 +97,7 @@ def checkin(request):
         user = request.user
         dateOfQuestion = datetime.today()
         checkInTime = timezone.now()
-        Calendar.objects.create(user=user, checkInTime=checkInTime,dateOfQuestion=dateOfQuestion)
+        Attendance.objects.create(user=user, checkInTime=checkInTime,dateOfQuestion=dateOfQuestion)
         return JsonResponse({'in_time': checkInTime})
     response = {'message': 'Success'}
     return JsonResponse(response)
@@ -109,10 +109,10 @@ def checkout(request):
         print("CHECK OUT") 
         user = request.user
         checkOutTime = timezone.now()
-        current_calendar = Calendar.objects.filter(user=user).latest('checkInTime')
-        current_calendar.checkOutTime = checkOutTime
-        current_calendar.save()
-        duration = current_calendar.calculate_duration()
+        current_attendance = Attendance.objects.filter(user=user).latest('checkInTime')
+        current_attendance.checkOutTime = checkOutTime
+        current_attendance.save()
+        duration = current_attendance.calculate_duration()
 
         # Get the schedule of the user's department
         profile = Profile.objects.get(user=request.user)
@@ -120,12 +120,13 @@ def checkout(request):
         schedule = Schedule.objects.get(department=department)
         late_time = datetime.combine(date.today(), schedule.schedule_start) + timedelta(minutes=15)
         late_time = late_time.time()
+        attendance_date = date.today()
 
 
         # Determine the status based on the schedule and check-in time
-        if current_calendar.checkInTime.time() > late_time:
+        if current_attendance.checkInTime.time() > late_time:
             status = 'L'  # Late
-        elif current_calendar.checkOutTime.time() < schedule.schedule_end:
+        elif current_attendance.checkOutTime.time() < schedule.schedule_end:
             status = 'LV'  # Leave
         elif duration > (schedule.schedule_end - schedule.schedule_start).total_seconds() / 3600.0:
             status = 'A'  # Absent
@@ -136,9 +137,10 @@ def checkout(request):
         attendance = Attendance.objects.create(
             user=user,
             name=profile.user.get_full_name(),
-            calendar=current_calendar,
             duration=duration,
             status=status,
+            dateOfQuestion=attendance_date,
+    
         )
 
         return JsonResponse({'out_time': checkOutTime, 'duration': duration})
