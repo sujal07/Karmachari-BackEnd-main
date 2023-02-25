@@ -179,3 +179,13 @@ def leaves(request):
             }
             return render(request,'leaves.html',context)
 
+@login_required(login_url='login')
+def salary(request):
+    user_object = User.objects.get(username=request.user.username)
+    profile = Profile.objects.get(user=user_object)
+    context={
+        'profile':profile,
+        'navbar':'salary',
+        
+    }
+    return render(request,'Salary_Sheet.html',context)
