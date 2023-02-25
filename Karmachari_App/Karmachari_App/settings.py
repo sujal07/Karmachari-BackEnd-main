@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainapp',
     'password_reset',
+    'calendarr',
     # 'debug_toolbar',
 ]
 
@@ -87,7 +88,7 @@ WSGI_APPLICATION = 'Karmachari_App.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'karmachari-db', 
+        'NAME': 'karmachari', 
         'USER': 'postgres',
         'PASSWORD': 'useradmin',
         'HOST': 'localhost', 

@@ -113,7 +113,7 @@ class Attendance(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     dateOfQuestion = models.DateField(null=True)
     checkInTime = models.DateTimeField(auto_now_add=True,null=True)
-    checkOutTime = models.DateTimeField(auto_now_add=True,null=True)
+    checkOutTime = models.DateTimeField(null=True)
     overtime = models.DateTimeField(null=True)
     name=models.CharField(max_length=255,null=True)
     duration = models.FloatField(null=True)
@@ -131,3 +131,13 @@ class Attendance(models.Model):
             return duration.total_seconds() / 3600.0  # Convert to hours
         else:
             return 0
+
+class Events(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255,null=True,blank=True)
+    start = models.DateTimeField(null=True,blank=True)
+    end = models.DateTimeField(null=True,blank=True)
+ 
+    class Meta:  
+        db_table = "tblevents"

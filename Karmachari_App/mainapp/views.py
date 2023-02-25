@@ -132,15 +132,26 @@ def checkout(request):
             status = 'A'  # Absent
         else:
             status = 'P'  # Presents
+    try:
+        attendance = Attendance.objects.filter(user=user, dateOfQuestion=attendance_date).latest('checkInTime')
+    except Attendance.DoesNotExist:
+        attendance = None
 
-        # Create an Attendance object
+    # If an attendance object already exists, update its checkOutTime, duration, and status
+    if attendance is not None:
+        attendance.checkOutTime = checkOutTime
+        attendance.duration = duration
+        attendance.status = status
+        attendance.save()
+    else:
+        # Create a new attendance object
         attendance = Attendance.objects.create(
             user=user,
             name=profile.user.get_full_name(),
             duration=duration,
             status=status,
             dateOfQuestion=attendance_date,
-    
+            checkOutTime=checkOutTime,
         )
 
         return JsonResponse({'out_time': checkOutTime, 'duration': duration})
