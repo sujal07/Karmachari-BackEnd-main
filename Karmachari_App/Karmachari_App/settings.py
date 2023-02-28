@@ -195,6 +195,7 @@ JAZZMIN_SETTINGS = {
     "site_header":"Karmachari",
     "site_brand": "Karmachari",
     "site_logo": "assets/img/icon32.png",
+    "footer_version": False,
     # Relative path to logo for your site, used for login logo (must be present in static files. Defaults to site_logo)
     "login_logo":"assets/img/icon80.png",
     "site_logo_classes": None,
