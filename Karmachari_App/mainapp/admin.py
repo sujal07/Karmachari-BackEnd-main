@@ -10,4 +10,6 @@ admin.site.register(Events)
 admin.site.register(Salary)
 admin.site.register(Payroll)
 admin.site.register(Schedule)
+admin.site.register(Attendance)
+
 
