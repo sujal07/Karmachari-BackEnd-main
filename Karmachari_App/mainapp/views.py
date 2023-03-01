@@ -125,13 +125,13 @@ def checkout(request):
 
         # Determine the status based on the schedule and check-in time
         if current_attendance.checkInTime.time() > late_time:
-            status = 'L'  # Late
+            status = 'Late'  # Late
         elif current_attendance.checkOutTime.time() < schedule.schedule_end:
-            status = 'LV'  # Leave
+            status = 'Leave'  # Leave
         elif duration > (schedule.schedule_end - schedule.schedule_start).total_seconds() / 3600.0:
-            status = 'A'  # Absent
+            status = 'Absent'  # Absent
         else:
-            status = 'P'  # Presents
+            status = 'Present'  # Presents
     try:
         attendance = Attendance.objects.filter(user=user, dateOfQuestion=attendance_date).latest('checkInTime')
     except Attendance.DoesNotExist:
