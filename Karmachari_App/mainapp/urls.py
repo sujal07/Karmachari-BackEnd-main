@@ -15,6 +15,7 @@ urlpatterns = [
     path('leaves',views.leaves, name='leaves'),
     path('checkin',views.checkin,name='checkin'),
     path('checkout',views.checkout,name='checkout'),
+    path('salary',views.salary,name='salary'),
     # path('leavesform',views.leavesform, name='leavesform'),
     # path('checkin',views.checkin, name='checkin'),
     # path('checkout',views.checkout, name='checkout'),
